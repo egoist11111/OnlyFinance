@@ -34,9 +34,10 @@ public:
     
     std::string getName() const;
     float getBalance() const;
+    currency getCurr() const;
     
     std::string accountTypetoString(accountType type);
-    std::string currencyToString(currency currency);
+    static std::string currencyToString(currency currency);
     
     void output();
 };

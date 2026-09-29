@@ -16,8 +16,13 @@ Account::Account(std::string name, float balance, accountType type, currency cur
 std::string Account::getName() const {
     return m_name;
 }
+
 float Account::getBalance() const {
     return m_balance;
+}
+
+currency Account::getCurr() const {
+    return m_currency;
 }
 
 std::string Account::accountTypetoString(accountType type) {
@@ -29,6 +34,8 @@ std::string Account::accountTypetoString(accountType type) {
         case accountType::Savings:
             return "Savings";
     }
+    
+    return "Unknown";
 }
 
 std::string Account::currencyToString(currency currency) {
@@ -40,6 +47,8 @@ std::string Account::currencyToString(currency currency) {
         case currency::USD:
             return "USD";
     }
+    
+    return "Unknown";
 }
 
 void Account::output() {

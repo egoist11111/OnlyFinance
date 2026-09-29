@@ -14,7 +14,8 @@ int main() {
     while(exit == false) {
         int menu;
         do{
-            std::cout << "\nBalance: " << yourFinance.getBalance() << "\n";
+            std::cout << "\nBalance:\n";
+            yourFinance.showBalances();
             std::cout << "Press 1 to add an account\n";
             std::cout << "Press 2 to delete an account\n";
             std::cout << "Press 3 to show all data\n";

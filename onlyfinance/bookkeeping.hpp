@@ -9,6 +9,7 @@
 #define bookkeeping_hpp
 
 #include <vector>
+#include <map>
 #include "account.hpp"
 
 class Bookkeeping {
@@ -18,8 +19,10 @@ private:
 public:
     Bookkeeping(int maxAccounts);
     
-    float getBalance() const;
+    std::map<currency, float> getBalances() const;
     int getAmount() const;
+    
+    void showBalances() const;
     
     bool addAccount(std::string name, float balance, accountType type, currency currency);
     bool delAccount(std::string name);

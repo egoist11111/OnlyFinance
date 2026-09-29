@@ -13,11 +13,11 @@ Bookkeeping::Bookkeeping(int maxAccounts)
 {
 }
 
-float Bookkeeping::getBalance() const {
-    float balance = 0;
+std::map<currency, float> Bookkeeping::getBalances() const {
+    std::map<currency, float> balance;
 
-    for(int i = 0; i < m_accounts.size(); i++) {
-        balance += m_accounts[i].getBalance();
+    for (const Account& account : m_accounts) {
+        balance[account.getCurr()] += account.getBalance();
     }
     
     return balance;
@@ -28,7 +28,7 @@ int Bookkeeping::getAmount() const {
 }
 
 bool Bookkeeping::addAccount(std::string name, float balance, accountType type, currency currency) {
-    for(int i = 0; i < m_accounts.size(); i++) {
+    for (int i = 0; i < m_accounts.size(); i++) {
         if(name == m_accounts[i].getName()) {
             return false;
         }
@@ -38,8 +38,16 @@ bool Bookkeeping::addAccount(std::string name, float balance, accountType type, 
     return true;
 }
 
+void Bookkeeping::showBalances() const {
+    auto balances = getBalances();
+    
+    for (const auto& [curr, balance] : balances) {
+        std::cout << balance << ' ' << Account::currencyToString(curr) << "\n";
+    }
+}
+
 bool Bookkeeping::delAccount(std::string name) {
-    for(int i = 0; i < m_accounts.size(); i++) {
+    for (int i = 0; i < m_accounts.size(); i++) {
         if(name == m_accounts[i].getName()) {
             m_accounts.erase(m_accounts.begin() + i);
             return true;
@@ -51,8 +59,9 @@ bool Bookkeeping::delAccount(std::string name) {
 
 void Bookkeeping::output() {
     std::cout << "Type" << "     Name     " << "Balance" << "     Currency\n";
-    for(int i = 0; i < m_accounts.size(); i++) {
+    for (int i = 0; i < m_accounts.size(); i++) {
         m_accounts[i].output();
     }
-    std::cout << "Balance: " << getBalance() << "\n";
+    std::cout << "Balance:\n";
+    showBalances();
 }
