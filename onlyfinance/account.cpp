@@ -51,6 +51,14 @@ std::string Account::currencyToString(currency currency) {
     return "Unknown";
 }
 
+void Account::minus(float value) {
+    m_balance -= value;
+}
+
+void Account::plus(float value) {
+    m_balance += value;
+}
+
 void Account::output() {
     std::cout << accountTypetoString(m_type) << "     " << m_name << "     " << m_balance <<
     "     " << currencyToString(m_currency) << std::endl;

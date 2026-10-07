@@ -11,22 +11,25 @@
 int main() {
     Bookkeeping yourFinance(20);
     bool exit = false;
-    while(exit == false) {
+    while(!exit) {
         int menu;
+        
         do{
             std::cout << "\nBalance:\n";
             yourFinance.showBalances();
             std::cout << "Press 1 to add an account\n";
             std::cout << "Press 2 to delete an account\n";
-            std::cout << "Press 3 to show all data\n";
-            std::cout << "Press 4 to exit\n";
+            std::cout << "Press 3 to add money to your account\n";
+            std::cout << "Press 4 to reduce money from your account\n";
+            std::cout << "Press 5 to show all data\n";
+            std::cout << "Press 6 to exit\n";
             std::cout << "Enter: ";
             
             std::cin >> menu;
-        }while(menu < 1 || menu > 4);
+        }while(menu < 1 || menu > 6);
         switch(menu) {
             case 1: {
-                if(yourFinance.getAmount() > 20) {
+                if(yourFinance.getAmount() >= 20) {
                     std::cout << "Error! You have too many accounts.\n";
                     break;
                 }
@@ -91,9 +94,47 @@ int main() {
                 }
             }
             case 3:
+            case 4: {
+                if (yourFinance.getAmount() == 0) {
+                    std::cout << "No accounts available.\n";
+                    break;
+                }
+                
+                float value;
+                std::cout << "Enter the amount of money: ";
+                std::cin >> value;
+
+                if (value <= 0) {
+                    std::cout << "Amount must be positive.\n";
+                    break;
+                }
+
+                std::string name;
+                while (true) {
+                    std::cout << "Choose an account: ";
+                    std::cin >> name;
+
+                    bool success;
+                    if (menu == 3) {
+                        success = yourFinance.plusMoney(name, value);
+                    } else {
+                        success = yourFinance.minusMoney(name, value);
+                    }
+
+                    if (success) {
+                        std::cout << "Succeed.\n";
+                        break;
+                    }
+
+                    std::cout << "The name doesn't match. Try one more time.\n";
+                }
+
+                break;
+            }
+            case 5:
                 yourFinance.output();
                 break;
-            case 4:
+            case 6:
                 exit = true;
                 break;
         }

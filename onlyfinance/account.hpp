@@ -39,6 +39,9 @@ public:
     std::string accountTypetoString(accountType type);
     static std::string currencyToString(currency currency);
     
+    void minus(float value);
+    void plus(float value);
+    
     void output();
 };
 

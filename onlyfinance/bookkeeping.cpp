@@ -57,6 +57,26 @@ bool Bookkeeping::delAccount(std::string name) {
     return false;
 }
 
+bool Bookkeeping::minusMoney(const std::string& name, float value) {
+    for (Account& account : m_accounts) {
+        if (account.getName() == name) {
+            account.minus(value);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Bookkeeping::plusMoney(const std::string& name, float value) {
+    for (Account& account : m_accounts) {
+        if (account.getName() == name) {
+            account.plus(value);
+            return true;
+        }
+    }
+    return false;
+}
+
 void Bookkeeping::output() {
     std::cout << "Type" << "     Name     " << "Balance" << "     Currency\n";
     for (int i = 0; i < m_accounts.size(); i++) {

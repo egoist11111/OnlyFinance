@@ -27,6 +27,9 @@ public:
     bool addAccount(std::string name, float balance, accountType type, currency currency);
     bool delAccount(std::string name);
     
+    bool minusMoney(const std::string& name, float value);
+    bool plusMoney(const std::string& name, float value);
+    
     void output();
 };
 
